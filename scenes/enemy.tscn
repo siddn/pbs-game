@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://cm8s01lb5q6hf"]
+
+[ext_resource type="Script" path="res://scenes/enemy.gd" id="1_pj7l3"]
+[ext_resource type="Texture2D" uid="uid://bem5ux22mru3f" path="res://assests/badguy.png" id="1_ret03"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i1ylo"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t3s7i"]
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 8
+script = ExtResource("1_pj7l3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-3.18, 0)
+texture = ExtResource("1_ret03")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("CapsuleShape2D_i1ylo")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 2)
+shape = SubResource("CapsuleShape2D_t3s7i")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
